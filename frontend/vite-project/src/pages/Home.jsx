@@ -1,350 +1,178 @@
-// import { Link } from 'react-router-dom';
-// import { motion } from 'framer-motion';
-// import { Car, TrendingUp, Brain, Zap, CheckCircle, ArrowRight } from 'lucide-react';
-// import { useEffect, useState } from 'react';
-// import { getModelInfo } from '../services/api';
-
-// const Home = () => {
-//   const [modelInfo, setModelInfo] = useState(null);
-  
-//   useEffect(() => {
-//     getModelInfo().then(setModelInfo).catch(console.error);
-//   }, []);
-  
-//   const features = [
-//     {
-//       icon: Brain,
-//       title: 'AI-Powered',
-//       description: 'Random Forest algorithm with 94.65% accuracy',
-//       color: 'from-blue-500 to-cyan-500',
-//     },
-//     {
-//       icon: TrendingUp,
-//       title: 'Market Analysis',
-//       description: 'K-Means clustering for market segmentation',
-//       color: 'from-purple-500 to-pink-500',
-//     },
-//     {
-//       icon: Zap,
-//       title: 'Instant Results',
-//       description: 'Get price predictions in seconds',
-//       color: 'from-orange-500 to-red-500',
-//     },
-//   ];
-  
-//   const stats = [
-//     { label: 'Accuracy', value: modelInfo ? `${(modelInfo.accuracy * 100).toFixed(1)}%` : '94.7%' },
-//     { label: 'Avg Error', value: modelInfo ? `±${(modelInfo.avg_error / 1000).toFixed(0)}k PKR` : '±186k' },
-//     { label: 'Model', value: 'Random Forest' },
-//   ];
-  
-//   return (
-//     <div className="min-h-screen">
-//       {/* Hero Section */}
-//       <section className="relative overflow-hidden py-20 px-4">
-//         <div className="max-w-7xl mx-auto">
-//           <div className="grid lg:grid-cols-2 gap-12 items-center">
-//             <motion.div
-//               initial={{ opacity: 0, x: -50 }}
-//               animate={{ opacity: 1, x: 0 }}
-//               transition={{ duration: 0.6 }}
-//             >
-//               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-//                 AI-Powered
-//                 <span className="gradient-text block">Car Price Predictor</span>
-//               </h1>
-              
-//               <p className="text-xl text-gray-600 mb-8">
-//                 Get instant, accurate car price predictions using advanced machine learning. 
-//                 Trained on 5,000+ Pakistani car listings.
-//               </p>
-              
-//               <div className="flex flex-wrap gap-4">
-//                 <Link
-//                   to="/predict"
-//                   className="btn-primary inline-flex items-center space-x-2"
-//                 >
-//                   <span>Start Prediction</span>
-//                   <ArrowRight className="w-5 h-5" />
-//                 </Link>
-                
-//                 <Link
-//                   to="/analytics"
-//                   className="btn-secondary inline-flex items-center space-x-2"
-//                 >
-//                   <span>View Analytics</span>
-//                   <TrendingUp className="w-5 h-5" />
-//                 </Link>
-//               </div>
-              
-//               {/* Stats */}
-//               <div className="grid grid-cols-3 gap-4 mt-12">
-//                 {stats.map((stat, idx) => (
-//                   <motion.div
-//                     key={stat.label}
-//                     initial={{ opacity: 0, y: 20 }}
-//                     animate={{ opacity: 1, y: 0 }}
-//                     transition={{ delay: idx * 0.1 }}
-//                     className="text-center"
-//                   >
-//                     <div className="text-2xl font-bold text-blue-600">{stat.value}</div>
-//                     <div className="text-sm text-gray-600">{stat.label}</div>
-//                   </motion.div>
-//                 ))}
-//               </div>
-//             </motion.div>
-            
-//             <motion.div
-//               initial={{ opacity: 0, x: 50 }}
-//               animate={{ opacity: 1, x: 0 }}
-//               transition={{ duration: 0.6 }}
-//               className="relative"
-//             >
-//               <div className="bg-gradient-to-br from-blue-600 to-purple-600 rounded-3xl p-8 shadow-2xl">
-//                 <Car className="w-64 h-64 mx-auto text-white opacity-20" />
-                
-//                 <div className="absolute inset-0 flex items-center justify-center">
-//                   <div className="bg-white rounded-2xl p-8 shadow-xl max-w-sm">
-//                     <h3 className="text-xl font-bold text-gray-900 mb-4">
-//                       Quick Preview
-//                     </h3>
-//                     <div className="space-y-3">
-//                       <div className="flex items-center justify-between">
-//                         <span className="text-gray-600">Brand</span>
-//                         <span className="font-semibold">Honda Civic</span>
-//                       </div>
-//                       <div className="flex items-center justify-between">
-//                         <span className="text-gray-600">Year</span>
-//                         <span className="font-semibold">2017</span>
-//                       </div>
-//                       <div className="flex items-center justify-between">
-//                         <span className="text-gray-600">Mileage</span>
-//                         <span className="font-semibold">60,000 km</span>
-//                       </div>
-//                       <div className="border-t pt-3">
-//                         <div className="flex items-center justify-between">
-//                           <span className="text-gray-600">Predicted Price</span>
-//                           <span className="text-2xl font-bold text-blue-600">36.4L</span>
-//                         </div>
-//                       </div>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </motion.div>
-//           </div>
-//         </div>
-//       </section>
-      
-//       {/* Features Section */}
-//       <section className="py-20 px-4 bg-white">
-//         <div className="max-w-7xl mx-auto">
-//           <motion.div
-//             initial={{ opacity: 0, y: 20 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             viewport={{ once: true }}
-//             className="text-center mb-16"
-//           >
-//             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-//               Why Choose Our Predictor?
-//             </h2>
-//             <p className="text-xl text-gray-600">
-//               Powered by cutting-edge machine learning technology
-//             </p>
-//           </motion.div>
-          
-//           <div className="grid md:grid-cols-3 gap-8">
-//             {features.map((feature, idx) => {
-//               const Icon = feature.icon;
-//               return (
-//                 <motion.div
-//                   key={feature.title}
-//                   initial={{ opacity: 0, y: 20 }}
-//                   whileInView={{ opacity: 1, y: 0 }}
-//                   viewport={{ once: true }}
-//                   transition={{ delay: idx * 0.1 }}
-//                   className="card-hover bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
-//                 >
-//                   <div className={`bg-gradient-to-r ${feature.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-6`}>
-//                     <Icon className="w-8 h-8 text-white" />
-//                   </div>
-//                   <h3 className="text-2xl font-bold text-gray-900 mb-3">
-//                     {feature.title}
-//                   </h3>
-//                   <p className="text-gray-600">
-//                     {feature.description}
-//                   </p>
-//                 </motion.div>
-//               );
-//             })}
-//           </div>
-//         </div>
-//       </section>
-      
-//       {/* How It Works */}
-//       <section className="py-20 px-4">
-//         <div className="max-w-7xl mx-auto">
-//           <motion.div
-//             initial={{ opacity: 0, y: 20 }}
-//             whileInView={{ opacity: 1, y: 0 }}
-//             viewport={{ once: true }}
-//             className="text-center mb-16"
-//           >
-//             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-//               How It Works
-//             </h2>
-//             <p className="text-xl text-gray-600">
-//               Simple 3-step process to get your prediction
-//             </p>
-//           </motion.div>
-          
-//           <div className="grid md:grid-cols-3 gap-8">
-//             {[
-//               { step: '1', title: 'Enter Details', desc: 'Provide car information like brand, model, year, and mileage' },
-//               { step: '2', title: 'AI Analysis', desc: 'Our Random Forest model analyzes 60+ features instantly' },
-//               { step: '3', title: 'Get Results', desc: 'Receive accurate price prediction with confidence score' },
-//             ].map((item, idx) => (
-//               <motion.div
-//                 key={item.step}
-//                 initial={{ opacity: 0, scale: 0.9 }}
-//                 whileInView={{ opacity: 1, scale: 1 }}
-//                 viewport={{ once: true }}
-//                 transition={{ delay: idx * 0.1 }}
-//                 className="text-center"
-//               >
-//                 <div className="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-//                   {item.step}
-//                 </div>
-//                 <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-//                 <p className="text-gray-600">{item.desc}</p>
-//               </motion.div>
-//             ))}
-//           </div>
-//         </div>
-//       </section>
-      
-//       {/* CTA Section */}
-//       <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600">
-//         <motion.div
-//           initial={{ opacity: 0, y: 20 }}
-//           whileInView={{ opacity: 1, y: 0 }}
-//           viewport={{ once: true }}
-//           className="max-w-4xl mx-auto text-center"
-//         >
-//           <h2 className="text-4xl font-bold text-white mb-6">
-//             Ready to Predict Your Car's Price?
-//           </h2>
-//           <p className="text-xl text-blue-100 mb-8">
-//             Join thousands of users who trust our AI-powered predictions
-//           </p>
-//           <Link
-//             to="/predict"
-//             className="inline-flex items-center space-x-2 bg-white text-blue-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all"
-//           >
-//             <span>Get Started Now</span>
-//             <ArrowRight className="w-5 h-5" />
-//           </Link>
-//         </motion.div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default Home;
-
-
 import React from 'react';
-import { Sparkles, Calculator, Bot, TrendingUp, BarChart3 } from 'lucide-react';
+import { Sparkles, Calculator, Bot, TrendingUp, BarChart3, Zap, Shield, Clock, CheckCircle2, ArrowRight } from 'lucide-react';
 
 const HomePage = ({ modelInfo, setCurrentPage, openChat }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
+    <div className="min-h-screen bg-[#0f172a] text-slate-200 relative overflow-hidden">
+      
+      {/* Dynamic Background */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/10 rounded-full blur-[120px] animate-pulse delay-700"></div>
+      </div>
+
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 25s linear infinite;
+        }
+        .glass-card {
+          background: rgba(255, 255, 255, 0.03);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+      `}</style>
+
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-600 px-4 py-2 rounded-full mb-6">
-            <Sparkles className="w-5 h-5" />
-            <span className="font-semibold">AI-Powered Predictions</span>
-          </div>
-          
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Predict Your Car's
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> True Value</span>
-          </h1>
-          
-          <p className="text-xl text-gray-600 mb-8">
-            Get instant, accurate car price predictions powered by advanced machine learning. 
-            Trained on 5,497+ real Pakistani car listings.
-          </p>
+      <div className="container mx-auto px-6 pt-32 pb-20 relative z-10 text-center">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 mb-8 animate-in fade-in slide-in-from-top-4 duration-1000">
+          <Sparkles className="w-4 h-4 animate-pulse" />
+          <span className="text-xs font-bold tracking-[0.2em] uppercase">V2.0 Next-Gen AI Model</span>
+        </div>
 
-          <div className="flex flex-wrap gap-4 justify-center mb-12">
-            <button
-              onClick={() => setCurrentPage('predict')}
-              className="flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all"
-            >
-              <Calculator className="w-5 h-5" />
-              Predict Price Now
-            </button>
-            <button
-              onClick={openChat}
-              className="flex items-center gap-2 px-8 py-4 bg-white text-gray-900 border-2 border-gray-200 rounded-xl font-semibold hover:border-blue-600 transition-all"
-            >
-              <Bot className="w-5 h-5" />
-              Chat with AI
-            </button>
-          </div>
+        <h1 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tight leading-[1.1] animate-in fade-in slide-in-from-bottom-4 duration-700">
+          Pakistan's Most Accurate <br/>
+          <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent">
+            AI Car Valuator
+          </span>
+        </h1>
 
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="text-3xl font-bold text-blue-600 mb-2">
-                {modelInfo?.accuracy_r2 ? `${(modelInfo.accuracy_r2 * 100).toFixed(1)}%` : '94.2%'}
-              </div>
-              <div className="text-gray-600">Model Accuracy</div>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="text-3xl font-bold text-purple-600 mb-2">5,497+</div>
-              <div className="text-gray-600">Cars Analyzed</div>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm">
-              <div className="text-3xl font-bold text-green-600 mb-2">&lt;2 sec</div>
-              <div className="text-gray-600">Prediction Time</div>
-            </div>
-          </div>
+        <p className="text-lg md:text-xl text-slate-400 mb-12 max-w-2xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-1000">
+          Stop guessing. Get instant market prices based on <span className="text-white font-bold italic">real-time</span> data from 5,000+ local vehicle listings.
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-5 justify-center mb-24">
+          <button
+            onClick={() => setCurrentPage('predict')}
+            className="group flex items-center justify-center gap-3 px-10 py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold transition-all hover:scale-[1.02] shadow-xl shadow-blue-600/20"
+          >
+            <Calculator className="w-6 h-6" />
+            Start Prediction
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
+          <button
+            onClick={openChat}
+            className="flex items-center justify-center gap-3 px-10 py-5 glass-card text-white rounded-2xl font-bold hover:bg-white/5 transition-all"
+          >
+            <Bot className="w-6 h-6 text-purple-400" />
+            Talk to AI Expert
+          </button>
+        </div>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <QuickStat label="Model Accuracy" val={modelInfo?.accuracy_r2 ? `${(modelInfo.accuracy_r2 * 100).toFixed(1)}%` : '94.2%'} color="text-blue-400" />
+          <QuickStat label="Active Dataset" val="5,497+" color="text-purple-400" />
+          <QuickStat label="Processing Time" val="&lt; 1.5s" color="text-emerald-400" />
         </div>
       </div>
 
-      {/* Features Section */}
-      <div className="bg-white py-16">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Why Choose Our Predictor?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="inline-flex p-4 bg-blue-100 rounded-full mb-4">
-                <TrendingUp className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">High Accuracy</h3>
-              <p className="text-gray-600">Advanced Random Forest algorithm with polynomial features</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex p-4 bg-purple-100 rounded-full mb-4">
-                <Bot className="w-8 h-8 text-purple-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Smart Chatbot</h3>
-              <p className="text-gray-600">Natural conversation to predict prices effortlessly</p>
-            </div>
-            <div className="text-center">
-              <div className="inline-flex p-4 bg-green-100 rounded-full mb-4">
-                <BarChart3 className="w-8 h-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Market Insights</h3>
-              <p className="text-gray-600">Real-time analytics from Pakistani car market</p>
-            </div>
-          </div>
+      {/* Brand Marquee (Extra Section) */}
+      <div className="py-10 border-y border-white/5 bg-white/[0.01] overflow-hidden whitespace-nowrap">
+        <div className="flex animate-marquee gap-12 items-center">
+          {['Suzuki', 'Honda', 'Toyota', 'Kia', 'Changan', 'Hyundai', 'Daihatsu', 'Nissan', 'MG', 'Proton'].map((brand) => (
+            <span key={brand} className="text-3xl font-black text-white/10 uppercase tracking-tighter">{brand}</span>
+          ))}
+          {/* Repeat for seamless loop */}
+          {['Suzuki', 'Honda', 'Toyota', 'Kia', 'Changan', 'Hyundai', 'Daihatsu', 'Nissan', 'MG', 'Proton'].map((brand) => (
+            <span key={brand + '2'} className="text-3xl font-black text-white/10 uppercase tracking-tighter">{brand}</span>
+          ))}
+        </div>
+      </div>
+
+      {/* How it Works Section (Extra Info) */}
+      <div className="container mx-auto px-6 py-32 relative z-10">
+        <div className="text-center mb-20">
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">How it <span className="text-blue-500">Works</span></h2>
+          <p className="text-slate-400">Three simple steps to find your car's true potential.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+          <StepCard 
+            num="01" 
+            title="Enter Details" 
+            desc="Provide your car's brand, model, year, and mileage in our smart form." 
+          />
+          <StepCard 
+            num="02" 
+            title="AI Analysis" 
+            desc="Our Random Forest algorithm compares your data against 5k+ current listings." 
+          />
+          <StepCard 
+            num="03" 
+            title="Instant Valuation" 
+            desc="Get a precise market range and confidence score in less than 2 seconds." 
+          />
+        </div>
+      </div>
+
+      {/* Features Grid */}
+      <div className="container mx-auto px-6 pb-32">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <FeatureCard 
+            icon={<TrendingUp className="text-blue-400" />} 
+            title="Regional Insights" 
+            desc="Prices optimized for Karachi, Lahore, Islamabad and other major cities."
+          />
+          <FeatureCard 
+            icon={<Shield className="text-purple-400" />} 
+            title="Verified Data" 
+            desc="Dataset cleaned from anomalies to ensure outliers don't affect your price."
+          />
+          <FeatureCard 
+            icon={<Zap className="text-emerald-400" />} 
+            title="Live Updates" 
+            desc="Market trends updated weekly to reflect the current inflation and policy changes."
+          />
+        </div>
+      </div>
+
+      {/* Trust Banner */}
+      <div className="container mx-auto px-6 mb-32">
+        <div className="glass-card p-12 rounded-[2rem] text-center border-blue-500/20 overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-3xl rounded-full"></div>
+          <h3 className="text-3xl font-bold text-white mb-6">Ready to check your car's value?</h3>
+          <button
+            onClick={() => setCurrentPage('predict')}
+            className="inline-flex items-center gap-3 px-12 py-5 bg-white text-slate-900 rounded-2xl font-black hover:bg-blue-50 transition-all hover:scale-105"
+          >
+            Go to Predictor
+          </button>
         </div>
       </div>
     </div>
   );
 };
+
+// Sub-components
+const QuickStat = ({ label, val, color }) => (
+  <div className="glass-card p-6 rounded-2xl border-white/5 transition-transform hover:-translate-y-1">
+    <div className={`text-3xl font-black ${color} mb-1 tracking-tight`}>{val}</div>
+    <div className="text-xs uppercase tracking-widest font-bold text-slate-500">{label}</div>
+  </div>
+);
+
+const StepCard = ({ num, title, desc }) => (
+  <div className="relative group">
+    <div className="text-6xl font-black text-white/5 absolute -top-10 -left-4 group-hover:text-blue-500/10 transition-colors">{num}</div>
+    <div className="relative z-10">
+      <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-2">
+        <CheckCircle2 className="w-5 h-5 text-blue-500" /> {title}
+      </h3>
+      <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
+    </div>
+  </div>
+);
+
+const FeatureCard = ({ icon, title, desc }) => (
+  <div className="glass-card p-8 rounded-3xl hover:border-white/20 transition-all">
+    <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center mb-6">{icon}</div>
+    <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
+    <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
+  </div>
+);
 
 export default HomePage;
