@@ -70,16 +70,18 @@ AI-Project/
 ```bash
 pip install -r requirements.txt
 python app.py
+
 cd frontend/vite-project
 npm install
 npm run dev
+
+---
+```md
 🎯 Use Case
 
-Used car buyers & sellers
-
-Market price estimation
-
-Academic & learning purpose (AI / ML project)
+- Used car buyers & sellers  
+- Market price estimation  
+- Academic & learning purpose (AI / ML project)
 
 👨‍💻 Author
 
