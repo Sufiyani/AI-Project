@@ -154,7 +154,8 @@ http://localhost:5173
 
 👨‍💻 Author
 
-Sufiyan Imran
+**Sufiyan Imran** 
+
 📧 **Email:** sufiyanimran55@gmail.com  
 🐙 **GitHub:** [sufiyanimran](https://github.com/Sufiyani)  
 💼 **LinkedIn:** [sufiyanimran](https://www.linkedin.com/in/sufiyanimran/) 
